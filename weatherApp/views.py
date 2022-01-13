@@ -1,12 +1,13 @@
 from django.shortcuts import render
 import urllib.request 
 import json
+from .secret2 import api
 # Create your views here.
 
 def index(request):
     if request.method == 'POST':
         city = request.POST['city']
-        source = urllib.request.urlopen(f'api.openweathermap.org/data/2.5/weather?q={city}&units=metric&appid=e38ea79e03a8c02b34eb82d4dbc780a4').read()
+        source = urllib.request.urlopen(f'http://api.openweathermap.org/data/2.5/weather?q={city}&units=metric&appid={api}').read()
         list_of_data = json.loads(source)
         data = {
             "country_code": str(list_of_data['sys']['country']),
